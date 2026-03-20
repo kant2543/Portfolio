@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kant Lersphuksakit — Strategy & Data Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0c0b09;--paper:#f6f4ef;--paper-alt:#f0ede6;
+  --gold:#a8854a;--gold-light:#c9a46e;--gold-dim:rgba(168,133,74,0.15);
+  --muted:#6a6560;--muted-light:#9b9690;--line:#e2ddd5;
+  --white:#ffffff;--dark:#100f0d;--dark-2:#181613;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.5}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 5rem;background:rgba(246,244,239,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:.75rem}
+.nav-logo::before{content:'';display:block;width:6px;height:6px;background:var(--gold);border-radius:50%}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .25s}
+.nav-links a:hover{color:var(--ink)}.nav-links a:hover::after{width:100%}
+.nav-toggle{display:none;flex-direction:column;justify-content:space-between;width:24px;height:17px;cursor:pointer;background:none;border:none;padding:0}
+.nav-toggle span{display:block;width:100%;height:1.5px;background:var(--ink);transition:all .3s;transform-origin:left}
+.nav-toggle.open span:nth-child(1){transform:rotate(45deg) translateY(-1px)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:rotate(-45deg) translateY(1px)}
+
+/* HERO */
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:4.5rem;position:relative}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:6rem 4rem 6rem 5rem}
+.hero-eyebrow{font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:1.75rem;display:flex;align-items:center;gap:.85rem}
+.hero-eyebrow::before{content:'';display:block;width:2.5rem;height:1px;background:var(--gold)}
+.hero-title{font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:2.25rem;padding-left:1.1rem;border-left:2px solid var(--gold);line-height:1.9}
+.hero-summary{color:var(--muted);max-width:28rem;font-size:0.95rem;line-height:1.9;margin-bottom:3rem;font-weight:300}
+.hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.hero-cta{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--white);font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;padding:.9rem 2.25rem;background:var(--ink);border:1px solid var(--ink);transition:all .3s}
+.hero-cta:hover{background:var(--gold);border-color:var(--gold)}
+.hero-cta-ghost{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--muted);font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;padding:.9rem 2.25rem;border:1px solid var(--line);transition:all .3s}
+.hero-cta-ghost:hover{border-color:var(--ink);color:var(--ink)}
+
+/* HERO RIGHT */
+.hero-right{background:var(--dark);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:5rem 4rem;position:relative;overflow:hidden;gap:4rem}
+.hero-right::before{content:'K';font-family:'Cormorant Garamond',serif;font-size:50vw;font-weight:600;color:rgba(255,255,255,0.02);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);line-height:1;pointer-events:none;white-space:nowrap;user-select:none}
+.hero-right::after{content:'';position:absolute;top:3rem;right:3rem;width:50px;height:50px;border-top:1px solid rgba(168,133,74,0.3);border-right:1px solid rgba(168,133,74,0.3);pointer-events:none}
+
+/* PHOTO */
+.hero-photo-wrap{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.25rem}
+.photo-ring{position:relative;width:200px;height:200px}
+.photo-ring::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(168,133,74,0.35);animation:rotate 12s linear infinite;border-top-color:var(--gold)}
+@keyframes rotate{to{transform:rotate(360deg)}}
+.hero-photo{width:200px;height:200px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);display:block;position:relative;z-index:1;transition:transform .4s ease}
+.hero-photo:hover{transform:scale(1.03)}
+.hero-photo-placeholder{width:200px;height:200px;border-radius:50%;border:1px dashed rgba(168,133,74,0.4);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:rgba(255,255,255,0.2);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;text-align:center;position:relative;z-index:1}
+.hero-photo-placeholder span:first-child{font-size:2rem;opacity:.3}
+
+/* STATS */
+.hero-stats{display:flex;flex-direction:column;gap:0;position:relative;z-index:1;width:100%;max-width:360px;border:1px solid rgba(255,255,255,0.08)}
+.stat{display:flex;align-items:center;gap:1.5rem;padding:1.1rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.06);transition:background .25s}
+.stat:last-child{border-bottom:none}
+.stat:hover{background:rgba(255,255,255,0.03)}
+.stat-num{font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:300;color:var(--gold-light);line-height:1;min-width:3.5rem;text-align:right;flex-shrink:0;transition:color .3s;letter-spacing:0.02em}
+.stat-body{border-left:1px solid rgba(168,133,74,0.25);padding-left:1.25rem}
+.stat-title{font-size:0.82rem;font-weight:500;color:rgba(255,255,255,0.75);line-height:1.3}
+.stat-label{font-size:0.68rem;color:rgba(255,255,255,0.3);letter-spacing:0.06em;margin-top:.15rem;line-height:1.3}
+
+/* SCROLL INDICATOR */
+.scroll-indicator{position:absolute;bottom:2.5rem;left:5rem;display:flex;align-items:center;gap:1rem;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)}
+.scroll-indicator::before{content:'';display:block;width:1px;height:40px;background:var(--line);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(0.5)}}
+
+/* SECTIONS */
+section{padding:8rem 5rem}
+.section-header{margin-bottom:4.5rem}
+.section-num{font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--gold);letter-spacing:0.18em;display:block;margin-bottom:.85rem}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:300;line-height:1.15}
+.section-line{width:2.5rem;height:1px;background:var(--gold);margin-top:1.25rem}
+
+/* ABOUT */
+#about{background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1.65fr;gap:7rem;align-items:start}
+.meta-item{padding:1.4rem 0;border-bottom:1px solid var(--line)}
+.meta-item:first-of-type{border-top:1px solid var(--line)}
+.meta-label{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;font-weight:500}
+.meta-value{font-size:0.9rem;color:var(--ink);line-height:1.7}
+.about-text p{color:var(--muted);margin-bottom:1.5rem;line-height:2;font-size:0.97rem;font-weight:300}
+.about-text p:first-child{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--ink);line-height:1.65;margin-bottom:2rem}
+
+/* SKILLS */
+#skills{background:var(--paper)}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px}
+.skill-card{background:var(--white);padding:2.75rem;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;cursor:default}
+.skill-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--gold);transition:width .4s}
+.skill-card:hover::after{width:100%}
+.skill-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.06)}
+.skill-icon{font-size:1.4rem;margin-bottom:1.25rem;display:block}
+.skill-cat{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;font-weight:500}
+.skill-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;margin-bottom:1.1rem;line-height:1.2}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.tag{font-size:0.68rem;padding:.28rem .7rem;background:var(--paper);color:var(--muted);border:1px solid var(--line);font-family:'DM Mono',monospace;letter-spacing:0.04em;transition:border-color .2s,color .2s}
+.skill-card:hover .tag{border-color:rgba(168,133,74,0.3);color:var(--ink)}
+
+/* EXPERIENCE / TIMELINE */
+#projects{background:var(--dark)}
+#projects .section-title{color:var(--paper)}
+#projects .section-num{color:var(--gold-light)}
+#projects .section-line{background:var(--gold-light)}
+
+.timeline{position:relative;padding-left:2.5rem}
+.timeline::before{content:'';position:absolute;left:0.5px;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,transparent 0%,rgba(168,133,74,0.5) 5%,rgba(168,133,74,0.5) 95%,transparent 100%)}
+
+.tl-item{display:grid;grid-template-columns:15rem 1fr;gap:3.5rem;padding:3rem 0;border-bottom:1px solid rgba(255,255,255,0.06);position:relative;transition:opacity .65s ease,transform .65s ease}
+.tl-item.hidden{opacity:0;transform:translateY(20px)}
+.tl-item:first-child{border-top:1px solid rgba(255,255,255,0.06)}
+
+.tl-left{padding-top:.35rem;position:relative}
+.tl-dot{position:absolute;left:-2.5rem;top:.55rem;width:1.25rem;height:1px;background:var(--gold);transition:width .3s}
+.tl-item:hover .tl-dot{width:1.75rem}
+
+.tl-period{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--gold-light);letter-spacing:0.06em;display:block;margin-bottom:.6rem}
+.tl-company{font-size:0.78rem;color:rgba(255,255,255,0.3);line-height:1.6;font-weight:300}
+
+.tl-card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:4px;padding:2rem 2.25rem;transition:background .3s,border-color .3s;cursor:pointer}
+.tl-item:hover .tl-card{background:rgba(255,255,255,0.045);border-color:rgba(168,133,74,0.2)}
+
+.tl-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.25rem}
+.tl-role{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:var(--paper);line-height:1.2}
+
+.tl-expand-btn{flex-shrink:0;margin-top:.25rem;color:rgba(255,255,255,0.25);transition:color .25s,transform .25s;display:flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid rgba(255,255,255,0.08);border-radius:50%}
+.tl-item:hover .tl-expand-btn{color:var(--gold-light);border-color:rgba(168,133,74,0.4);transform:translateX(3px)}
+
+.exp-bullets{list-style:none}
+.exp-bullets li{color:rgba(255,255,255,0.48);font-size:0.88rem;padding:.4rem 0;display:flex;gap:.85rem;font-weight:300;line-height:1.7}
+.exp-bullets li::before{content:'—';color:var(--gold);flex-shrink:0;opacity:.7}
+
+.exp-highlight{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.4rem;font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--gold-light);background:rgba(168,133,74,0.08);border:1px solid rgba(168,133,74,0.25);border-radius:999px;padding:.45rem 1rem;letter-spacing:0.05em}
+
+/* CONTACT */
+#contact{background:var(--paper-alt)}
+.contact-intro{font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:300;line-height:1.5;color:var(--ink);margin-bottom:.85rem;max-width:42rem}
+.contact-sub{color:var(--muted);font-size:0.9rem;line-height:1.85;margin-bottom:3.5rem;max-width:38rem;font-weight:300}
+.contact-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.contact-card{display:flex;flex-direction:column;align-items:flex-start;gap:.85rem;padding:2.25rem 2rem;background:var(--white);text-decoration:none;color:var(--ink);position:relative;overflow:hidden;transition:background .25s}
+.contact-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--gold);transition:width .35s}
+.contact-card:hover{background:var(--paper)}
+.contact-card:hover::after{width:100%}
+.cc-icon{font-size:1.3rem;line-height:1;background:var(--paper);border-radius:8px;width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);transition:border-color .25s}
+.contact-card:hover .cc-icon{border-color:rgba(168,133,74,0.4)}
+.cc-label{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.cc-value{font-size:0.85rem;color:var(--muted);word-break:break-all;line-height:1.5;font-weight:300}
+.cc-action{margin-top:auto;padding-top:.5rem;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);display:flex;align-items:center;gap:.4rem;font-weight:500}
+.cc-action span{transition:transform .25s;display:inline-block}
+.contact-card:hover .cc-action span{transform:translateX(5px)}
+
+/* FOOTER */
+footer{background:var(--dark);color:rgba(255,255,255,0.25);padding:3rem 5rem;display:flex;justify-content:space-between;align-items:center;font-size:0.68rem;letter-spacing:0.1em}
+.footer-left{font-family:'Cormorant Garamond',serif;font-size:0.9rem;font-weight:300;color:rgba(255,255,255,0.35);letter-spacing:0.04em}
+.footer-right{font-family:'DM Mono',monospace;letter-spacing:0.2em;font-size:0.62rem;color:rgba(255,255,255,0.15);text-transform:uppercase}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:9000;background:rgba(12,11,9,0.82);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:2rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:var(--dark-2);max-width:680px;width:100%;position:relative;transform:translateY(24px) scale(.98);transition:transform .38s cubic-bezier(.22,1,.36,1);overflow:hidden;border:1px solid rgba(255,255,255,0.07)}
+.modal-overlay.open .modal-box{transform:translateY(0) scale(1)}
+.modal-close{position:absolute;top:1.25rem;right:1.25rem;z-index:10;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.12);cursor:pointer;color:rgba(255,255,255,0.6);width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:0.85rem;transition:all .2s}
+.modal-close:hover{color:var(--white);border-color:rgba(255,255,255,0.4);background:rgba(0,0,0,0.7)}
+.modal-header{padding:1.75rem 2rem 1.25rem;border-bottom:1px solid rgba(255,255,255,0.06)}
+.modal-eyebrow{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:.3rem}
+.modal-company{font-size:0.72rem;color:rgba(255,255,255,0.3);letter-spacing:0.05em;margin-bottom:.45rem}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--paper);line-height:1.25}
+
+/* GALLERY */
+.modal-gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab}
+.modal-gallery::-webkit-scrollbar{display:none}
+.modal-gallery.grabbing{cursor:grabbing}
+.mg-slide{flex:0 0 100%;scroll-snap-align:start;display:flex;flex-direction:column}
+.mg-img{width:100%;aspect-ratio:16/9;background:var(--ink);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.mg-img img{width:100%;height:100%;object-fit:cover;display:block}
+.mg-placeholder{display:flex;flex-direction:column;align-items:center;gap:.75rem;color:rgba(255,255,255,0.15)}
+.mg-placeholder span{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase}
+.mg-caption{padding:1.25rem 2rem 1.5rem;border-top:1px solid rgba(255,255,255,0.05)}
+.mg-caption-label{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;font-weight:500}
+.mg-caption-text{font-size:0.9rem;color:rgba(255,255,255,0.65);line-height:1.75;font-weight:300}
+.modal-dots{display:flex;justify-content:center;gap:.5rem;padding:.75rem 2rem 1.25rem;border-top:1px solid rgba(255,255,255,0.05)}
+.modal-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.2);transition:background .25s,transform .25s;cursor:pointer;border:none;padding:0}
+.modal-dot.active{background:var(--gold);transform:scale(1.3)}
+.modal-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;background:rgba(0,0,0,0.45);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-arrow:hover{background:rgba(0,0,0,0.7);color:var(--white)}
+.modal-arrow.prev{left:.85rem}
+.modal-arrow.next{right:.85rem}
+.modal-arrow:disabled{opacity:0;pointer-events:none}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.hero-eyebrow{animation:fadeUp .7s ease both}
+.hero-title{animation:fadeUp .7s .2s ease both}
+.hero-summary{animation:fadeUp .7s .3s ease both}
+.hero-actions{animation:fadeUp .7s .4s ease both}
+.hero-photo-wrap{animation:fadeUp .7s .2s ease both}
+.hero-stats{animation:fadeUp .7s .35s ease both}
+
+/* RESPONSIVE */
+@media(max-width:1100px){nav{padding:1.1rem 3rem}section{padding:7rem 3rem}.hero-left{padding:6rem 3rem 6rem 3rem}.hero-right{padding:5rem 3rem}footer{padding:2.5rem 3rem}.scroll-indicator{left:3rem}}
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(246,244,239,0.98);backdrop-filter:blur(16px);flex-direction:column;padding:2rem;gap:1.5rem;border-bottom:1px solid var(--line)}
+  .nav-links.open{display:flex}.nav-toggle{display:flex}
+  #hero{grid-template-columns:1fr;min-height:auto;padding-top:4rem}
+  .hero-left{padding:4rem 1.75rem 3rem;order:2}.hero-right{order:1;padding:4rem 1.75rem 3rem;min-height:auto;gap:3rem}
+  .photo-ring,.hero-photo{width:150px;height:150px}
+  section{padding:5rem 1.75rem}
+  .about-grid{grid-template-columns:1fr;gap:3.5rem}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .timeline{padding-left:1.75rem}
+  .tl-item{grid-template-columns:1fr;gap:.75rem;padding:2.5rem 0}
+  .tl-dot{left:-2.2rem;transform:translateX(50%)}
+  .tl-card{padding:1.5rem}
+  .contact-cards{grid-template-columns:1fr 1fr}
+  footer{flex-direction:column;gap:.75rem;text-align:center;padding:2.5rem 1.75rem}
+  .scroll-indicator{display:none}.hero-stats{max-width:100%}
+}
+@media(max-width:560px){
+  .skills-grid{grid-template-columns:1fr}
+  .contact-cards{grid-template-columns:1fr}
+  .hero-actions{flex-direction:column;align-items:flex-start}
+  .hero-cta,.hero-cta-ghost{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">Kant Lersphuksakit</a>
+  <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Expertise</a></li>
+    <li><a href="#projects">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero" style="position:relative">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Available for the Right Opportunity</div>
+    <div class="hero-title">Operations Strategy &nbsp;·&nbsp; Data Intelligence<br>Business Development &nbsp;·&nbsp; FMCG &amp; Retail</div>
+    <p class="hero-summary">A results-driven professional with close to 4 years of experience transforming complex data into decisive action. I bridge the gap between field-level execution and board-level strategy — using analytics, automation, and commercial instinct to move markets.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="hero-cta">View My Work &nbsp;→</a>
+      <a href="#contact" class="hero-cta-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-wrap">
+      <div class="photo-ring">
+        <img id="hero-photo-img" src="data:image/jpeg;base64,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" alt="Kant Lersphuksakit" class="hero-photo" onerror="this.style.display='none';document.querySelector('.hero-photo-placeholder').style.display='flex';">
+        <div class="hero-photo-placeholder" style="display:none"><span>📷</span><span>Profile Photo</span></div>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">4</span><div class="stat-body"><div class="stat-title">Years of Experience</div><div class="stat-label">FMCG &amp; Retail Operations</div></div></div>
+      <div class="stat"><span class="stat-num">35%</span><div class="stat-body"><div class="stat-title">Peak Revenue Growth</div><div class="stat-label">Provincial sales territory</div></div></div>
+      <div class="stat"><span class="stat-num">30+</span><div class="stat-body"><div class="stat-title">Team Members Led</div><div class="stat-label">Cross-functional operations</div></div></div>
+      <div class="stat"><span class="stat-num">7</span><div class="stat-body"><div class="stat-title">Provinces Managed</div><div class="stat-label">Multi-territory coverage</div></div></div>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll to explore</div>
+</section>
+
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-header">
+        <span class="section-num">01 — Profile</span>
+        <h2 class="section-title">At a Glance</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="meta-item"><div class="meta-label">Education</div><div class="meta-value">B.Sc. Business Administration &amp; Management<br>King Mongkut's Institute of Technology Ladkrabang<br><span style="color:var(--muted);font-size:.85em">GPA 3.17</span></div></div>
+      <div class="meta-item"><div class="meta-label">Languages</div><div class="meta-value">Thai — Native Proficiency<br>English — Professional Working (TOEIC 620)</div></div>
+      <div class="meta-item"><div class="meta-label">Current Position</div><div class="meta-value">Operations Strategy Specialist<br>C.J. Express Group Co., Ltd.</div></div>
+      <div class="meta-item"><div class="meta-label">Core Industries</div><div class="meta-value">FMCG · Modern Trade · Traditional Trade<br>Retail Operations · Supply Chain</div></div>
+    </div>
+    <div class="about-text">
+      <p>Great decisions are not made on instinct alone — they are built on clean data, clear thinking, and the courage to act on both.</p>
+      <p>With experience spanning Charoen Pokphand Group and C.J. Express Group, I have navigated the full commercial lifecycle: from launching new products into competitive categories to driving regional sales performance across seven provinces.</p>
+      <p>I design systems that make insight actionable. Whether deploying automated reporting pipelines, re-engineering a sales territory's incentive structure, or coordinating a cross-functional team of 30 toward a shared quarterly target — I operate at the intersection of strategy and execution.</p>
+      <p>Beyond conventional tools, I actively apply AI-driven automation — including workflow orchestration via Make and n8n — to eliminate reporting latency and surface opportunities before they become urgent.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">02 — Expertise</span>
+    <h2 class="section-title">Core Competencies</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card"><span class="skill-icon">📊</span><div class="skill-cat">Analytics</div><div class="skill-name">Data Analysis &amp; Intelligence</div><div class="skill-tags"><span class="tag">SQL</span><span class="tag">BigQuery</span><span class="tag">Python</span><span class="tag">Excel</span></div></div>
+    <div class="skill-card"><span class="skill-icon">📈</span><div class="skill-cat">Visualization</div><div class="skill-name">Performance Dashboards &amp; Reporting</div><div class="skill-tags"><span class="tag">Looker Studio</span><span class="tag">Dashboard Design</span><span class="tag">Automated Reporting</span><span class="tag">Web Design</span></div></div>
+    <div class="skill-card"><span class="skill-icon">🎯</span><div class="skill-cat">Strategy</div><div class="skill-name">Sales Strategy &amp; Territory Planning</div><div class="skill-tags"><span class="tag">Target Planning</span><span class="tag">Campaign Design</span><span class="tag">Market Analysis</span></div></div>
+    <div class="skill-card"><span class="skill-icon">🤝</span><div class="skill-cat">Commercial</div><div class="skill-name">Business Development</div><div class="skill-tags"><span class="tag">FMCG</span><span class="tag">Retail</span><span class="tag">Product Development</span><span class="tag">P&amp;L Management</span></div></div>
+    <div class="skill-card"><span class="skill-icon">🤖</span><div class="skill-cat">Automation</div><div class="skill-name">AI-Powered Workflow Automation</div><div class="skill-tags"><span class="tag">Make</span><span class="tag">n8n</span><span class="tag">AI Automation</span><span class="tag">Workflow Ops</span></div></div>
+    <div class="skill-card"><span class="skill-icon">💬</span><div class="skill-cat">AI Proficiency</div><div class="skill-name">LLM &amp; Prompt Engineering</div><div class="skill-tags"><span class="tag">Prompt Design</span><span class="tag">LLM Optimization</span><span class="tag">AI Integration</span></div></div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">03 — Career History</span>
+    <h2 class="section-title">Where I've Delivered Results</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+
+    <div class="tl-item" data-exp="cj">
+      <div class="tl-left"><div class="tl-dot"></div><span class="tl-period">Sep 2024 — Present</span><div class="tl-company">C.J. Express Group Co., Ltd.</div></div>
+      <div class="tl-card">
+        <div class="tl-card-top"><div class="tl-role">Operations Strategy Specialist</div><div class="tl-expand-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="currentColor" stroke-opacity=".4"/><path d="M5 8h6M8 5l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+        <ul class="exp-bullets">
+          <li>Architected and executed multi-provincial sales strategies across 7 provinces, encompassing target-setting frameworks and localised campaign design calibrated to each territory's competitive landscape.</li>
+          <li>Coordinated a cross-functional team of 30, driving alignment between operations, sales, and logistics to resolve bottlenecks and sustain on-ground performance momentum.</li>
+          <li>Conducted systematic competitor intelligence and field assessments to identify white-space growth opportunities on a per-area basis.</li>
+          <li>Developed automated KPI dashboards and reporting pipelines that reduced insight latency and empowered leadership with real-time decision-grade data.</li>
+        </ul>
+        <span class="exp-highlight">🗺️ 7 Provinces &nbsp;·&nbsp; Team of 30</span>
+      </div>
+    </div>
+
+    <div class="tl-item" data-exp="cp2024">
+      <div class="tl-left"><div class="tl-dot"></div><span class="tl-period">Jan — Jun 2024</span><div class="tl-company">Charoen Pokphand Group Co., Ltd.</div></div>
+      <div class="tl-card">
+        <div class="tl-card-top"><div class="tl-role">Partnership Lead — Shop-in-Shop (Lotus's)</div><div class="tl-expand-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="currentColor" stroke-opacity=".4"/><path d="M5 8h6M8 5l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+        <ul class="exp-bullets">
+          <li>Drove a 25% uplift in fresh product category sales through a structured commercial partnership with Lotus's, coordinating joint activation strategies across multiple store formats.</li>
+          <li>Engineered promotional mechanics designed to increase product trial, shelf visibility, and repeat purchase frequency among target customer segments.</li>
+          <li>Optimised in-store operations and floor-level execution to improve conversion rates and elevate the end-to-end customer experience.</li>
+        </ul>
+        <span class="exp-highlight">📦 +25% Category Sales Growth</span>
+      </div>
+    </div>
+
+    <div class="tl-item" data-exp="cp2023">
+      <div class="tl-left"><div class="tl-dot"></div><span class="tl-period">Jan — Dec 2023</span><div class="tl-company">Charoen Pokphand Group Co., Ltd.</div></div>
+      <div class="tl-card">
+        <div class="tl-card-top"><div class="tl-role">Product Development Lead — Egg &amp; Shrimp Categories</div><div class="tl-expand-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="currentColor" stroke-opacity=".4"/><path d="M5 8h6M8 5l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+        <ul class="exp-bullets">
+          <li>Identified and captured untapped market segments within the egg and shrimp categories by leading end-to-end product development cycles from concept validation to commercial launch.</li>
+          <li>Constructed go-to-market strategies grounded in financial modelling and consumer insight, ensuring each launch delivered measurable margin contribution from day one.</li>
+          <li>Strengthened supply chain resilience by streamlining upstream coordination, reducing fulfilment gaps and improving on-shelf availability across key accounts.</li>
+        </ul>
+        <span class="exp-highlight">🥚 Multiple New Product Launches</span>
+      </div>
+    </div>
+
+    <div class="tl-item" data-exp="cp2022">
+      <div class="tl-left"><div class="tl-dot"></div><span class="tl-period">May — Dec 2022</span><div class="tl-company">Charoen Pokphand Group Co., Ltd.</div></div>
+      <div class="tl-card">
+        <div class="tl-card-top"><div class="tl-role">Regional Sales Lead — Traditional Trade, Phetchabun</div><div class="tl-expand-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="currentColor" stroke-opacity=".4"/><path d="M5 8h6M8 5l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+        <ul class="exp-bullets">
+          <li>Led an 8-person regional sales force to achieve 35% revenue growth, reaching a sustained monthly run-rate of 12.3M THB — a result that outperformed the preceding year's trajectory by a significant margin.</li>
+          <li>Coordinated upstream operations between farm production, logistics, and last-mile distribution to maintain fulfilment integrity across the province.</li>
+          <li>Held full P&amp;L accountability for shrimp and chicken sales, making pricing, volume, and channel-mix decisions that directly impacted profitability.</li>
+        </ul>
+        <span class="exp-highlight">💰 35% Revenue Growth &nbsp;·&nbsp; 12.3M THB / Month</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALLERY MODAL -->
+<div id="exp-modal" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close">✕</button>
+    <button class="modal-arrow prev" id="modal-prev">&#8592;</button>
+    <button class="modal-arrow next" id="modal-next">&#8594;</button>
+    <div class="modal-header">
+      <div class="modal-eyebrow" id="modal-period"></div>
+      <div class="modal-company" id="modal-company"></div>
+      <div class="modal-title" id="modal-title"></div>
+    </div>
+    <div class="modal-gallery" id="modal-gallery"></div>
+    <div class="modal-dots" id="modal-dots"></div>
+  </div>
+</div>
+
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">04 — Contact</span>
+    <h2 class="section-title">Let's Start a Conversation</h2>
+    <div class="section-line"></div>
+  </div>
+  <p class="contact-intro">Open to senior opportunities in operations strategy, commercial analytics, and business development — particularly within FMCG, retail, and high-growth organisations.</p>
+  <p class="contact-sub">Whether you're evaluating a potential hire, exploring a strategic partnership, or simply want to exchange ideas — I'd be glad to hear from you.</p>
+  <div class="contact-cards">
+    <a href="mailto:kant25431@gmail.com" class="contact-card"><span class="cc-icon">✉️</span><span class="cc-label">Email</span><span class="cc-value">kant25431@gmail.com</span><span class="cc-action">Compose email <span>→</span></span></a>
+    <a href="tel:+66945578883" class="contact-card"><span class="cc-icon">📞</span><span class="cc-label">Phone</span><span class="cc-value">094-557-8883</span><span class="cc-action">Call directly <span>→</span></span></a>
+    <a href="https://line.me/ti/p/~kant25431" target="_blank" rel="noopener" class="contact-card"><span class="cc-icon">💬</span><span class="cc-label">LINE</span><span class="cc-value">kant25431</span><span class="cc-action">Open LINE <span>→</span></span></a>
+    <a href="https://www.linkedin.com/in/kant-lersphuksakit/" target="_blank" rel="noopener" class="contact-card"><span class="cc-icon">🔗</span><span class="cc-label">LinkedIn</span><span class="cc-value">Kant Lersphuksakit</span><span class="cc-action">View profile <span>→</span></span></a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-left">Have a challenge that needs solving? Let's talk.</span>
+  <span class="footer-right">Insight &nbsp;·&nbsp; Strategy &nbsp;·&nbsp; Execution</span>
+</footer>
+
+<script>
+// NAV
+var toggle = document.getElementById('navToggle');
+var navLinks = document.getElementById('navLinks');
+toggle.addEventListener('click', function() { toggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+navLinks.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { toggle.classList.remove('open'); navLinks.classList.remove('open'); }); });
+
+// SCROLL REVEAL
+var revealObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (!e.isIntersecting) return; e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; revealObs.unobserve(e.target); });
+}, { threshold: 0.1 });
+document.querySelectorAll('section:not(#hero):not(#projects), .contact-card, .about-grid').forEach(function(el) {
+  el.style.opacity='0'; el.style.transform='translateY(20px)'; el.style.transition='opacity .65s ease,transform .65s ease'; revealObs.observe(el);
+});
+document.querySelectorAll('.skill-card').forEach(function(c,i) { c.style.transitionDelay=(i*0.08)+'s'; });
+document.querySelectorAll('.contact-card').forEach(function(c,i) { c.style.transitionDelay=(i*0.07)+'s'; });
+
+// ANIMATED COUNTER
+function animateCounter(el, target, suffix, duration) {
+  var start = performance.now();
+  function update(now) {
+    var p = Math.min((now-start)/duration,1);
+    var eased = 1-Math.pow(1-p,3);
+    el.textContent = Math.floor(eased*target);
+    if (p < 1) requestAnimationFrame(update);
+    else el.textContent = target+suffix;
+  }
+  requestAnimationFrame(update);
+}
+var counterDone = false;
+var counterObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (!e.isIntersecting || counterDone) return;
+    counterDone = true;
+    var data = [{val:4,suffix:''},{val:35,suffix:'%'},{val:30,suffix:'+'},{val:7,suffix:''}];
+    e.target.querySelectorAll('.stat-num').forEach(function(el,i) {
+      if (!data[i]) return;
+      setTimeout(function() { animateCounter(el,data[i].val,data[i].suffix,1200); }, i*100);
+    });
+    counterObs.unobserve(e.target);
+  });
+}, { threshold: 0.4 });
+var statsEl = document.querySelector('.hero-stats');
+if (statsEl) counterObs.observe(statsEl);
+
+// TIMELINE REVEAL
+var tlObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (!e.isIntersecting) return; e.target.classList.remove('hidden'); tlObs.unobserve(e.target); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.tl-item').forEach(function(item,i) {
+  item.classList.add('hidden'); item.style.transitionDelay=(i*0.12)+'s'; tlObs.observe(item);
+});
+
+// GALLERY MODAL
+var expData = {
+  cj: {
+    period: 'Sep 2024 — Present', company: 'C.J. Express Group Co., Ltd.', role: 'Operations Strategy Specialist',
+    slides: [
+      { img: null, label: 'Multi-Province Strategy', caption: 'Architected sales target frameworks for 7 provinces — each calibrated to local market size, competitive density, and growth potential.' },
+      { img: null, label: 'Team Coordination', caption: 'Led a cross-functional team of 30 across operations, sales, and logistics — aligning priorities weekly to eliminate bottlenecks and sustain momentum.' },
+      { img: null, label: 'Automated KPI Dashboard', caption: 'Built a Looker Studio pipeline that consolidated multi-province sales data, cutting reporting lag from 5 days to same-day.' },
+      { img: null, label: 'Competitor Intelligence', caption: 'Ran systematic field assessments and competitor analysis per territory to surface white-space opportunities before they closed.' }
+    ]
+  },
+  cp2024: {
+    period: 'Jan — Jun 2024', company: 'Charoen Pokphand Group Co., Ltd.', role: "Partnership Lead — Shop-in-Shop (Lotus's)",
+    slides: [
+      { img: null, label: '+25% Category Sales Growth', caption: "Drove a 25% uplift in fresh product sales through a structured commercial partnership with Lotus's across multiple store formats." },
+      { img: null, label: 'Promotional Mechanics', caption: 'Designed activations to boost trial and repeat purchase — shelf positioning, bundling, and in-store sampling aligned to shopper behaviour.' },
+      { img: null, label: 'In-Store Execution', caption: 'Optimised floor-level operations and staff coordination to improve conversion and elevate the end-to-end shopper experience.' }
+    ]
+  },
+  cp2023: {
+    period: 'Jan — Dec 2023', company: 'Charoen Pokphand Group Co., Ltd.', role: 'Product Development Lead — Egg & Shrimp',
+    slides: [
+      { img: null, label: 'New Product Launches', caption: 'Identified untapped price-tier segments in egg and shrimp categories and led full product development cycles from concept to commercial launch.' },
+      { img: null, label: 'Go-to-Market Strategy', caption: 'Built GTM models grounded in financial analysis and consumer insight — ensuring each launch hit margin targets from day one.' },
+      { img: null, label: 'Supply Chain Resilience', caption: 'Streamlined upstream coordination between farms and distribution to close fulfilment gaps and maintain consistent on-shelf availability.' }
+    ]
+  },
+  cp2022: {
+    period: 'May — Dec 2022', company: 'Charoen Pokphand Group Co., Ltd.', role: 'Regional Sales Lead — Traditional Trade, Phetchabun',
+    slides: [
+      { img: null, label: '35% Revenue Growth', caption: 'Led an 8-person sales team to a 35% YoY increase, sustaining a monthly run-rate of 12.3M THB across traditional trade channels.' },
+      { img: null, label: 'P&L Ownership', caption: 'Held full accountability for shrimp and chicken profitability — making real-time pricing, volume, and channel-mix decisions independently.' },
+      { img: null, label: 'Operational Coordination', caption: 'Connected farm production, logistics, and last-mile teams to maintain fulfilment integrity and minimise out-of-stock events across the province.' }
+    ]
+  }
+};
+
+var modal    = document.getElementById('exp-modal');
+var mPeriod  = document.getElementById('modal-period');
+var mCompany = document.getElementById('modal-company');
+var mTitle   = document.getElementById('modal-title');
+var mGallery = document.getElementById('modal-gallery');
+var mDots    = document.getElementById('modal-dots');
+var btnPrev  = document.getElementById('modal-prev');
+var btnNext  = document.getElementById('modal-next');
+var currentSlide = 0, totalSlides = 0;
+var isDown = false, startX = 0, scrollLeft = 0;
+
+function buildSlide(s) {
+  var imgHtml = s.img
+    ? '<img src="'+s.img+'" alt="'+s.label+'">'
+    : '<div class="mg-placeholder"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="1" y="1" width="38" height="38" rx="4" stroke="currentColor" stroke-width="1.2"/><circle cx="14" cy="15" r="4" stroke="currentColor" stroke-width="1.2"/><path d="M1 28l10-8 7 6 6-5 15 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Photo coming soon</span></div>';
+  return '<div class="mg-slide"><div class="mg-img">'+imgHtml+'</div><div class="mg-caption"><div class="mg-caption-label">'+s.label+'</div><div class="mg-caption-text">'+s.caption+'</div></div></div>';
+}
+
+function goTo(idx) {
+  currentSlide = Math.max(0, Math.min(idx, totalSlides-1));
+  mGallery.scrollTo({ left: currentSlide * mGallery.offsetWidth, behavior: 'smooth' });
+  mDots.querySelectorAll('.modal-dot').forEach(function(d,i) { d.classList.toggle('active', i===currentSlide); });
+  btnPrev.disabled = currentSlide === 0;
+  btnNext.disabled = currentSlide === totalSlides-1;
+}
+
+function openExpModal(key) {
+  var d = expData[key]; if (!d) return;
+  currentSlide = 0; totalSlides = d.slides.length;
+  mPeriod.textContent = d.period; mCompany.textContent = d.company; mTitle.textContent = d.role;
+  mGallery.innerHTML = d.slides.map(buildSlide).join('');
+  mDots.innerHTML = d.slides.map(function(_,i) { return '<button class="modal-dot'+(i===0?' active':'')+'" onclick="goTo('+i+')"></button>'; }).join('');
+  btnPrev.disabled = true; btnNext.disabled = totalSlides <= 1;
+  mGallery.scrollLeft = 0;
+  modal.classList.add('open'); document.body.style.overflow='hidden';
+}
+
+function closeModal() { modal.classList.remove('open'); document.body.style.overflow=''; }
+
+btnPrev.addEventListener('click', function() { goTo(currentSlide-1); });
+btnNext.addEventListener('click', function() { goTo(currentSlide+1); });
+mGallery.addEventListener('mousedown', function(e) { isDown=true; mGallery.classList.add('grabbing'); startX=e.pageX-mGallery.offsetLeft; scrollLeft=mGallery.scrollLeft; });
+mGallery.addEventListener('mouseleave', function() { isDown=false; mGallery.classList.remove('grabbing'); });
+mGallery.addEventListener('mouseup', function() { isDown=false; mGallery.classList.remove('grabbing'); });
+mGallery.addEventListener('mousemove', function(e) { if(!isDown) return; e.preventDefault(); mGallery.scrollLeft=scrollLeft-(e.pageX-mGallery.offsetLeft-startX); });
+var scrollTimer;
+mGallery.addEventListener('scroll', function() {
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(function() {
+    var idx = Math.round(mGallery.scrollLeft/mGallery.offsetWidth);
+    if (idx!==currentSlide) { currentSlide=idx; mDots.querySelectorAll('.modal-dot').forEach(function(d,i){d.classList.toggle('active',i===currentSlide);}); btnPrev.disabled=currentSlide===0; btnNext.disabled=currentSlide===totalSlides-1; }
+  }, 80);
+});
+document.querySelectorAll('.tl-item[data-exp]').forEach(function(item) {
+  item.querySelector('.tl-card').addEventListener('click', function() { openExpModal(item.dataset.exp); });
+});
+document.getElementById('modal-close').addEventListener('click', closeModal);
+modal.addEventListener('click', function(e) { if (e.target===modal) closeModal(); });
+document.addEventListener('keydown', function(e) {
+  if (!modal.classList.contains('open')) return;
+  if (e.key==='Escape') closeModal();
+  if (e.key==='ArrowLeft') goTo(currentSlide-1);
+  if (e.key==='ArrowRight') goTo(currentSlide+1);
+});
+window.goTo = goTo;
+</script>
+</body>
+</html>
