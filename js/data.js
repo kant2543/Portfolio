@@ -35,6 +35,7 @@ window.EXPERIENCE = {
     role: 'Product Development Lead — Egg & Shrimp',
     slides: [
       { img: 'assets/img/cp-launch.jpg', label: 'New Product Launches', caption: 'Identified untapped price-tier segments in egg and shrimp and led full product development cycles from concept to commercial launch.' },
+      { img: 'assets/img/cp23-egg-range.jpg', label: 'Tiered Egg Range', caption: 'Rolled out a branded egg range across fresh-market stalls and CP outlets, with good-better-best pack tiers to capture different price points.' },
       { img: 'assets/img/cp-gtm.jpg', label: 'Go-to-Market Strategy', caption: 'GTM plans grounded in financial analysis and consumer insight — each launch built to hit margin targets from day one.' },
       { img: 'assets/img/cp-supply.jpg', label: 'Supply Chain Resilience', caption: 'Streamlined upstream coordination between farms and distribution to close fulfilment gaps and keep shelves stocked.' },
       { img: 'assets/img/cp23-market.jpg', label: 'Field Market Research', caption: 'Visited fresh markets and traditional-trade outlets to validate price tiers and pack formats before each launch.' }
