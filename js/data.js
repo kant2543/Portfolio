@@ -24,9 +24,9 @@ window.EXPERIENCE = {
     company: 'Charoen Pokphand Group Co., Ltd.',
     role: "Partnership Lead — Shop-in-Shop (Lotus's)",
     slides: [
-      { img: null, label: '+25% Category Sales Growth', caption: "Drove a 25% uplift in fresh product sales through a structured commercial partnership with Lotus's across multiple store formats." },
-      { img: null, label: 'Promotional Mechanics', caption: 'Designed activations to boost trial and repeat purchase — shelf positioning, bundling and in-store sampling aligned to shopper behaviour.' },
-      { img: null, label: 'In-Store Execution', caption: 'Optimised floor-level operations and staff coordination to improve conversion and the end-to-end shopper experience.' }
+      { img: 'assets/img/cp24-promo.jpg', label: '+25% Category Sales Growth', caption: "Drove a 25% uplift in fresh product sales through a structured commercial partnership with Lotus's across multiple store formats." },
+      { img: 'assets/img/cp24-shelf.jpg', label: 'Promotional Mechanics', caption: 'Designed activations to boost trial and repeat purchase — shelf positioning, bundling and in-store sampling aligned to shopper behaviour.' },
+      { img: 'assets/img/cp24-instore.jpg', label: 'In-Store Execution', caption: 'Optimised floor-level operations and staff coordination to improve conversion and the end-to-end shopper experience.' }
     ]
   },
   cp2023: {
@@ -36,7 +36,8 @@ window.EXPERIENCE = {
     slides: [
       { img: 'assets/img/cp-launch.jpg', label: 'New Product Launches', caption: 'Identified untapped price-tier segments in egg and shrimp and led full product development cycles from concept to commercial launch.' },
       { img: 'assets/img/cp-gtm.jpg', label: 'Go-to-Market Strategy', caption: 'GTM plans grounded in financial analysis and consumer insight — each launch built to hit margin targets from day one.' },
-      { img: 'assets/img/cp-supply.jpg', label: 'Supply Chain Resilience', caption: 'Streamlined upstream coordination between farms and distribution to close fulfilment gaps and keep shelves stocked.' }
+      { img: 'assets/img/cp-supply.jpg', label: 'Supply Chain Resilience', caption: 'Streamlined upstream coordination between farms and distribution to close fulfilment gaps and keep shelves stocked.' },
+      { img: 'assets/img/cp23-market.jpg', label: 'Field Market Research', caption: 'Visited fresh markets and traditional-trade outlets to validate price tiers and pack formats before each launch.' }
     ]
   },
   cp2022: {
@@ -44,9 +45,9 @@ window.EXPERIENCE = {
     company: 'Charoen Pokphand Group Co., Ltd.',
     role: 'Regional Sales Lead — Traditional Trade, Phetchabun',
     slides: [
-      { img: null, label: '35% Revenue Growth', caption: 'Led an 8-person sales team to a 35% increase, sustaining a monthly run-rate of 12.3M THB across traditional trade.' },
-      { img: null, label: 'P&L Ownership', caption: 'Full accountability for shrimp and chicken profitability — real-time pricing, volume and channel-mix decisions.' },
-      { img: null, label: 'Operational Coordination', caption: 'Connected farm production, logistics and last-mile teams to keep fulfilment reliable and minimise out-of-stocks.' }
+      { img: 'assets/img/cp22-roadshow.jpg', label: '35% Revenue Growth', caption: 'Led an 8-person sales team to a 35% increase, sustaining a monthly run-rate of 12.3M THB across traditional trade.' },
+      { img: 'assets/img/cp22-market.jpg', label: 'P&L Ownership', caption: 'Full accountability for shrimp and chicken profitability — real-time pricing, volume and channel-mix decisions.' },
+      { img: 'assets/img/cp22-plant.jpg', label: 'Operational Coordination', caption: 'Connected farm production, logistics and last-mile teams to keep fulfilment reliable and minimise out-of-stocks.' }
     ]
   }
 };
