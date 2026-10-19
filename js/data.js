@@ -14,9 +14,9 @@ window.EXPERIENCE = {
     slides: [
       { img: 'assets/img/cj-dashboard.jpg', label: 'Automated KPI Dashboard', caption: 'Looker Studio and BigQuery pipeline consolidating branch sales data so leadership sees performance without waiting on manual reports.' },
       { img: 'assets/img/cj-co-flow.jpg', label: 'Automated CO Flow', caption: 'Web-based system automating customer-order workflows for field teams, with an integrated competitor price tracker for territory-level decisions.' },
-      { img: null, label: 'Branch Network Analytics', caption: 'Interactive map of ~2,000 branches with competitor layers and proximity analysis, used for target setting and new-branch planning.' },
-      { img: null, label: 'Multi-Province Strategy', caption: 'Sales target frameworks for 7 provinces — each calibrated to local market size, competitive density and growth potential.' },
-      { img: null, label: 'Team Coordination', caption: 'Aligned a cross-functional team of 30 across operations, sales and logistics to eliminate bottlenecks and sustain momentum.' }
+      { img: 'assets/img/cj-branch-map.jpg', label: 'Branch Network Analytics', caption: 'Interactive map of ~2,000 branches with competitor layers and proximity analysis, used for target setting and new-branch planning.' },
+      { img: 'assets/img/cj-fair-calendar.jpg', label: 'Fair & Campaign Scheduling', caption: 'Built the system branches use to book in-store fairs — scheduling windows, new-store and SSSG targeting, HQ batch upload and role-based access for field and HQ.' },
+      { img: 'assets/img/cj-team.jpg', label: 'Team Coordination', caption: 'Aligned a cross-functional team of 30 across operations, sales and logistics to eliminate bottlenecks and sustain momentum.' }
     ]
   },
   cp2024: {
