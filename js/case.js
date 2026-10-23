@@ -57,6 +57,7 @@
     '<div class="cs-eyebrow">' + esc(c.domain) + ' · ' + esc(c.type) + ' · ' + esc(c.company) + (c.year ? ' ' + esc(c.year) : '') + '</div>' +
     '<h1 class="cs-title">' + esc(c.title) + '</h1>' +
     '<p class="cs-hook">' + esc(c.hook) + '</p>' +
+    '<p class="cs-about">Part of my <a href="index.html#cases">Decision Lab</a> — a weekly practice where I take one real business decision, work it end to end, defend it under challenge, then check it against what actually happened.</p>' +
     '<div class="cs-bluf"><h2>Bottom line up front</h2><ul>' + (c.summary || []).map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ul></div>' +
     sec('The situation', paras(c.situation)) +
     sec('The real question', '<p class="cs-question">' + esc(c.question) + '</p>' + paras(c.reframe)) +
