@@ -10,6 +10,8 @@ Personal portfolio site: operations strategy, data & analytics, and internal aut
 index.html        page layout & static content (About, Skills, Experience, Contact)
 css/style.css     all styles
 js/data.js        ← edit here: experience popup slides + "Tools I've Built" cards
+js/cases.js       ← Case Studies (Decision Lab) — section hidden while empty
+case.html         one case page, rendered by js/case.js from ?id=<case id>
 js/main.js        behaviour (nav, animations, modal, contact)
 assets/
   profile.jpg     profile photo
@@ -22,6 +24,7 @@ assets/
 - **Add a project:** add an object to `window.PROJECTS` in `js/data.js`.
 - **Add a photo to an experience popup:** put the image in `assets/img/` and set `img: 'assets/img/your-file.jpg'` on the slide (`img: null` shows a placeholder).
 - **Change experience bullets / stats:** edit `index.html` directly.
+- **Add a case study:** add an object to `window.CASES` in `js/cases.js` (shape documented at the top of the file). It appears on the homepage and at `case.html?id=<id>`. Cases come from weekend sharpening sessions in KantOS (skill `kantos-sharpen`).
 
 ## Deploy (GitHub Pages)
 

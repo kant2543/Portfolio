@@ -45,6 +45,31 @@
     }).join('');
   }
 
+  /* ---------- CASE STUDIES ---------- */
+  var casesGrid = document.getElementById('cases-grid');
+  var cases = (window.CASES || []).slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+  if (casesGrid && cases.length) {
+    casesGrid.innerHTML = cases.map(function (c) {
+      var sc = c.scorecard || {};
+      var vals = Object.keys(sc).map(function (k) { return sc[k]; });
+      var avg = vals.length ? (vals.reduce(function (x, y) { return x + y; }, 0) / vals.length).toFixed(1) : '';
+      return '<a class="case-card reveal" href="case.html?id=' + encodeURIComponent(c.id) + '">' +
+        '<div class="project-top"><span class="project-cat">' + esc(c.domain) + ' · ' + esc(c.type) + '</span>' +
+        (avg ? '<span class="case-score" title="Self-assessed score (avg of 5 dimensions)">' + avg + ' / 5</span>' : '') + '</div>' +
+        '<div class="case-meta">' + esc(c.company) + (c.year ? ' · ' + esc(c.year) : '') + '</div>' +
+        '<h3 class="project-name">' + esc(c.title) + '</h3>' +
+        '<p class="project-desc">' + esc(c.hook) + '</p>' +
+        '<p class="case-insight"><span>Key insight</span>' + esc(c.insight) + '</p>' +
+        '<span class="case-read">Read the case <span>→</span></span>' +
+        '</a>';
+    }).join('');
+  } else {
+    var casesSec = document.getElementById('cases');
+    var casesNav = document.getElementById('nav-cases');
+    if (casesSec) casesSec.remove();
+    if (casesNav) casesNav.remove();
+  }
+
   /* ---------- SCROLL REVEAL ---------- */
   document.querySelectorAll('.about-grid, .skill-card, .contact-card, .projects-intro').forEach(function (el) {
     el.classList.add('reveal');
